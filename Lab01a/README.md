@@ -2,7 +2,7 @@
 
 <h3>Laboratório realizado no dia 3 de março</h3>
 
-<ins>Conteúdo:</ins> Enviamos um código na linguagem C para o Git que execute o Hello World. O código foi compilado e executado no ambiente da AWS gerenciado pelo grupo. Vale notar que o arquivo compilado pelo GCC não foi publicado neste repositório, somente o código-fonte.
+<ins>Conteúdo:</ins> Um programa "Hello, world!" foi desenvolvido e enviado para este repositório através da ferramenta de versionamento git. O código foi desenvolvido, compilado e executado no ambiente da AWS gerenciado pelo grupo.
 
 <ins>Integrantes:</ins>
 
