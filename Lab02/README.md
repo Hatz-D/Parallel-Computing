@@ -33,19 +33,19 @@ Por fim, as matrizes A, B e C são impressas na tela usando a função imprimema
 
 Para realizar a compilação dos códigos-fonte aqui disponibilizados, faz-se necessária a utilização do compilador GCC. Caso não o tenha instalado, basta digitar o seguinte comando em um terminal linux: <code>sudo yum install gcc</code>. A compilação dos arquivos .c deste repositório podem ser compilados da seguinte forma: <code>gcc exemplo.c -lpthread</code>, em que o campo exemplo é substituído pelo nome do arquivo .c. Após isso, um arquivo <code>a.out</code> será gerado. Vale ressaltar que como o código-fonte deste laboratório utiliza pthreads, é necessário adicionar o argumento <code>-lpthread</code> durante a compilação do programa.
 
-<img src="https://github.com/Hatz-D/ProjetoSOs/blob/main/src/3a-compilacao.png" alt="Processo de compilação">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02/compilacao.png" alt="Processo de compilação">
 
 <hr>
 <h2>Execução</h2>
 Para executá-lo, basta digitar o seguinte comando: <code>./a.out</code>. Caso o arquivo gerado possua um nome diferente, basta substituir o arquivo <code> a.out</code> pelo nome do arquivo gerado no comando anterior.
-<img src="https://github.com/Hatz-D/ProjetoSOs/blob/main/src/3a-execucao.png" alt="Processo de execução">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02/execucao.png" alt="Processo de execução">
 
 <hr>
 <h2>Geração do log de execução</h2>
 
 Para realizar a geração do log de execução dos programas aqui disponibilizados, o método de redirecionamento de saída padrão do Linux foi utilizado por meio do operador de append: <code>>></code>. O código-fonte foi compilado e executado, suas saídas foram adicionadas ao arquivo "log" aqui disponível através do seguinte comando: <code>gcc multiplicamatrizes.c -o teste.bin -lpthread && ./teste.bin >> log</code>.
 
-<img src="https://github.com/Hatz-D/ProjetoSOs/blob/main/src/3a-logs.png" alt="Processo de geração do log">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02/logs.png" alt="Processo de geração do log">
 
 
 
