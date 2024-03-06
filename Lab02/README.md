@@ -11,8 +11,9 @@
 <h2>Índice</h2>
 
 <ul>
-<li><code>multiplicamatrizes.c</code>: Código-fonte do exercício proposto. 
-<li><code>log</code>: Log das saída relativa à execução do programa acima.
+<li><code>multiplicamatrizes.c</code>: Código-fonte do exercício proposto.</li>
+<li><code>log</code>: Log das saída relativa à execução do programa acima.</li>
+<li><code>compilado.bin</code>: Binário da compilação do programa.</li>
 </ul>
 
 <hr>
