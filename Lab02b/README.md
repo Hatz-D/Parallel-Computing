@@ -27,20 +27,24 @@ A função multiplicamatrizes é responsável por calcular cada célula da matri
 
 Vale notar que para validar o paralelismo do código desenvolvido, um outro código foi criado para que threads sejam criadas e entrem no estado de busywait com um loop while. Desta forma, é possível obter a visualização de quais núcleos da CPU estão sendo ocupados pelas threads com um programa como <code>htop</code>. O código fonte deste teste é referente ao item <code>whiletrue.c</code> presente neste repositório.
 
-<img src="" alt="Busywait">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/busywait-compilacao.PNG" alt="Busywait">
+
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/htop-busywait.PNG" alt="Busywait">
+
+<hr>
 
 <h2>Questões</h2>
 <b>1. Qual o tempo de execução serial e paralelo para 1, 2, 4, 6 e 8 processadores? Desenhe um gráfico contendo todos os tempos de execução</b>
 
 Durante o desenvolvimento do exercício, foi notório como o tempo de execução serial não mudou com a adição ou remoção de vCPUs, assim como o tempo de execução paralelo apresentou uma diferença pouco significativa com a adição ou remoção de vCPUs, como é possível ver no gráfico abaixo. O fato de o tempo de execução serial ser menor do que o tempo de execução paralela para a multiplicação de matrizes 10x10 foi atribuído ao custo de criação e deleção das threads, que pode ser superior ao ganho tido pela paralelização do código desenvolvido.
 
-<img src="" alt="Gráfico do tempo de execução serial e paralelo">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/serialXparalela.PNG" alt="Gráfico do tempo de execução serial e paralelo">
 
 <b>2. Qual o speedup para 1, 2, 4, 6 e 8 processadores? Desenhe um gráfico mostrando os diferentes valores de speedup.</b>
 
 O speedup para 1, 2, 4, 6 e 8 processadores foi praticamente 1, o que representa uma constância no tempo de execução do código desenvolvido. Ou seja: mesmo que somente um núcleo fosse utilizado para a execução do código, o que representa um tempo serial, o tempo de execução seria o mesmo. Esse resultado pode ser atribuído ao fato de o problema possuir uma escala pequena. É provável que para problemas mais complexos, a adição de mais núcleos aumentaria o speedup.
 
-<img src="" alt="Gráfico do speedup">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/speedup.PNG" alt="Gráfico do speedup">
 
 <b>3. Como você acha que poderia melhorar o seu algoritmo para obter maior benefício com o paralelismo? Para provar seu ponto, refaça a solução com essa abordagem e construa um novo gráfico de speedup para 1, 2, 4, 6 e 8 processadores.</b>
 
@@ -48,15 +52,17 @@ O resultado obtido pelo grupo foi atribuído ao custo de se criar e destruir in�
 
 <img src="" alt="Gráfico do speedup">
 
+<hr>
+
 <h2>Compilação</h2>
 
 Para realizar a compilação dos códigos-fonte aqui disponibilizados, faz-se necessária a utilização do compilador GCC. Caso não o tenha instalado, basta digitar o seguinte comando em um terminal linux: <code>sudo yum install gcc</code>. A compilação dos arquivos .c deste repositório podem ser compilados da seguinte forma: <code>gcc exemplo.c -lpthread</code>, em que o campo exemplo é substituído pelo nome do arquivo .c. Após isso, um arquivo <code>a.out</code> será gerado. Vale ressaltar que como o código-fonte deste laboratório utiliza pthreads, é necessário adicionar o argumento <code>-lpthread</code> durante a compilação do programa. 
 
-<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02/compilacao.png" alt="Processo de compilação">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/2vcpus.PNG" alt="Processo de compilação">
 
 <hr>
 <h2>Execução</h2>
 Para executá-lo, basta digitar o seguinte comando: <code>./a.out</code>. Caso o arquivo gerado possua um nome diferente, basta substituir o arquivo <code> a.out</code> pelo nome do arquivo gerado no comando anterior. Vale notar que o único programa que requer um argumento para a sua execução é o código-fonte <code>while-true.c</code>, o argumento sendo a quantidade de threads criadas para busywait.
 
-<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02/execucao.png" alt="Processo de execução">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/8vcpus.PNG" alt="Processo de execução">
 
