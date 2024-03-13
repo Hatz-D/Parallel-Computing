@@ -54,9 +54,13 @@ O speedup para 1, 2, 4, 6 e 8 processadores foi praticamente 1, o que representa
 
 <ins><b>3. Como você acha que poderia melhorar o seu algoritmo para obter maior benefício com o paralelismo? Para provar seu ponto, refaça a solução com essa abordagem e construa um novo gráfico de speedup para 1, 2, 4, 6 e 8 processadores.</b></ins>
 
-O resultado obtido pelo grupo foi atribuído ao custo de se criar e destruir inúmeras threads. Portanto, a abordagem encontrada para solucionar esse problema diz respeito à utilização de menos threads: ao invés de criar uma thread para cada elemento da matriz, criar uma thread para cada linha/coluna da matriz. Os resultados da experiência se encontram abaixo:
+O resultado obtido pelo grupo foi atribuído ao custo de se criar e destruir inúmeras threads. Portanto, a abordagem encontrada para solucionar esse problema diz respeito à utilização de menos threads: ao invés de criar uma thread para cada elemento da matriz, criar uma thread para cada linha/coluna da matriz. Os resultados da experiência confirmam a teoria: o custo da criação e deleção das threads impacta na performance do código:
 
-<img src="" alt="Gráfico do speedup">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/speedup-linha.PNG" alt="Gráfico do speedup">
+
+<br>
+
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/tabela-linha.PNG" alt="Tabela">
 
 <hr>
 
