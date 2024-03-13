@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int matrizA[10][10] = {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+                     {11, 12, 13, 14, 15, 16, 17, 18, 19, 20},
+                     {21, 22, 23, 24, 25, 26, 27, 28, 29, 30},
+                     {31, 32, 33, 34, 35, 36, 37, 38, 39, 40},
+                     {41, 42, 43, 44, 45, 46, 47, 48, 49, 50},
+                     {51, 52, 53, 54, 55, 56, 57, 58, 59, 60},
+                     {61, 62, 63, 64, 65, 66, 67, 68, 69, 70},
+                     {71, 72, 73, 74, 75, 76, 77, 78, 79, 80},
+                     {81, 82, 83, 84, 85, 86, 87, 88, 89, 90},
+                     {91, 92, 93, 94, 95, 96, 97, 98, 99, 100}};
+
+int matrizB[10][10] = {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+                     {11, 12, 13, 14, 15, 16, 17, 18, 19, 20},
+                     {21, 22, 23, 24, 25, 26, 27, 28, 29, 30},
+                     {31, 32, 33, 34, 35, 36, 37, 38, 39, 40},
+                     {41, 42, 43, 44, 45, 46, 47, 48, 49, 50},
+                     {51, 52, 53, 54, 55, 56, 57, 58, 59, 60},
+                     {61, 62, 63, 64, 65, 66, 67, 68, 69, 70},
+                     {71, 72, 73, 74, 75, 76, 77, 78, 79, 80},
+                     {81, 82, 83, 84, 85, 86, 87, 88, 89, 90},
+                     {91, 92, 93, 94, 95, 96, 97, 98, 99, 100}};
+
+int matrizC[10][10];
+
+void multiplicaMatriz(int matrizA[][10], int matrizB[][10], int m, int n2, int p) {
+        for (int i = 0; i < m; i++) {
+                for (int j = 0; j < p; j++) {
+                        matrizC[i][j] = 0;
+                        for (int k = 0; k < n2; k++) {
+                                matrizC[i][j] += matrizA[i][k] * matrizB[k][j];
+                        }
+
+                }
+        }
+}
+
+void imprimematriz(int matriz[][10], int linha, int coluna) {
+        for(int i = 0; i < linha; i++) {
+                for(int j = 0; j < coluna; j++) {
+                        printf("%d ", matriz[i][j]);
+                }
+
+                printf("\n");
+        }
+}
+
+int main() {
+        int m = sizeof(matrizA)/sizeof(matrizA[0]);
+        int n1 = sizeof(matrizA[0])/sizeof(int);
+        int n2 = sizeof(matrizB)/sizeof(matrizB[0]);
+        int p = sizeof(matrizB[0])/sizeof(int);
+
+        if(n1 != n2) {
+                fprintf(stderr, "A quantidade de colunas da matriz A deve ser igual à quantidade de linhas da matriz B!\n");
+                return 1;
+        }
+
+        int contador = 0;
+
+        multiplicaMatriz(matrizA, matrizB, m, n2, p);
+
+        printf("\nMatriz A:\n");
+        imprimematriz(matrizA, m, n1);
+        printf("\nMatriz B:\n");
+        imprimematriz(matrizB, n2, p);
+        printf("\nMatriz C = Matriz A x Matrix B:\n");
+        imprimematriz(matrizC, m, p);
+
+        return 0;
+}
