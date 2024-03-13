@@ -29,14 +29,12 @@ int matrizC[10][10];
 void * multiplicamatrizes(void * args) {
 	int * arguments = (int*) args;
 	int i = arguments[0];
-	int n = arguments[1];
+	int p = arguments[1];
 
-
-	matrizC[i][j] = 0;
-
-	for(int k = 0; k < n; k++) {
-		for(int p = 0; p < ) {
-			matrizC[i][j] += matrizA[i][k] * matrizB[k][j];
+	for(int k = 0; k < p; k++) {
+		matrizC[i][k] = 0;
+		for(int n = 0; n < p; n++) {
+			matrizC[i][k] += matrizA[i][n] * matrizB[n][k];
 		}
 	}
 
@@ -71,7 +69,7 @@ int main() {
 	for(int i = 0; i < m; i++) {
 		int * args = (int*) malloc(2 * sizeof(int));
 		args[0] = i;
-		args[1] = n1;
+		args[1] = p;
 		pthread_create(&thread_array[contador], NULL, multiplicamatrizes, (void*)args);
 		contador++;
 	}
