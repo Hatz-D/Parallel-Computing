@@ -29,6 +29,8 @@ Vale notar que para validar o paralelismo do código desenvolvido, um outro cód
 
 <img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/busywait-compilacao.PNG" alt="Busywait">
 
+<br>
+
 <img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/htop-busywait.PNG" alt="Busywait">
 
 <hr>
@@ -45,6 +47,10 @@ Durante o desenvolvimento do exercício, foi notório como o tempo de execução
 O speedup para 1, 2, 4, 6 e 8 processadores foi praticamente 1, o que representa uma constância no tempo de execução do código desenvolvido. Ou seja: mesmo que somente um núcleo fosse utilizado para a execução do código, o que representa um tempo serial, o tempo de execução seria o mesmo. Esse resultado pode ser atribuído ao fato de o problema possuir uma escala pequena. É provável que para problemas mais complexos, a adição de mais núcleos aumentaria o speedup.
 
 <img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/speedup.PNG" alt="Gráfico do speedup">
+
+<br>
+
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/table.PNG" alt="Tabela">
 
 <b>3. Como você acha que poderia melhorar o seu algoritmo para obter maior benefício com o paralelismo? Para provar seu ponto, refaça a solução com essa abordagem e construa um novo gráfico de speedup para 1, 2, 4, 6 e 8 processadores.</b>
 
