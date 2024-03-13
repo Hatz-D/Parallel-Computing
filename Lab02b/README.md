@@ -36,13 +36,13 @@ Vale notar que para validar o paralelismo do código desenvolvido, um outro cód
 <hr>
 
 <h2>Questões</h2>
-<b>1. Qual o tempo de execução serial e paralelo para 1, 2, 4, 6 e 8 processadores? Desenhe um gráfico contendo todos os tempos de execução</b>
+<ins><b>1. Qual o tempo de execução serial e paralelo para 1, 2, 4, 6 e 8 processadores? Desenhe um gráfico contendo todos os tempos de execução</b></ins>
 
 Durante o desenvolvimento do exercício, foi notório como o tempo de execução serial não mudou com a adição ou remoção de vCPUs, assim como o tempo de execução paralelo apresentou uma diferença pouco significativa com a adição ou remoção de vCPUs, como é possível ver no gráfico abaixo. O fato de o tempo de execução serial ser menor do que o tempo de execução paralela para a multiplicação de matrizes 10x10 foi atribuído ao custo de criação e deleção das threads, que pode ser superior ao ganho tido pela paralelização do código desenvolvido.
 
 <img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/serialXparalela.PNG" alt="Gráfico do tempo de execução serial e paralelo">
 
-<b>2. Qual o speedup para 1, 2, 4, 6 e 8 processadores? Desenhe um gráfico mostrando os diferentes valores de speedup.</b>
+<ins><b>2. Qual o speedup para 1, 2, 4, 6 e 8 processadores? Desenhe um gráfico mostrando os diferentes valores de speedup.</b></ins>
 
 O speedup para 1, 2, 4, 6 e 8 processadores foi praticamente 1, o que representa uma constância no tempo de execução do código desenvolvido. Ou seja: mesmo que somente um núcleo fosse utilizado para a execução do código, o que representa um tempo serial, o tempo de execução seria o mesmo. Esse resultado pode ser atribuído ao fato de o problema possuir uma escala pequena. É provável que para problemas mais complexos, a adição de mais núcleos aumentaria o speedup.
 
@@ -52,7 +52,7 @@ O speedup para 1, 2, 4, 6 e 8 processadores foi praticamente 1, o que representa
 
 <img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/table.PNG" alt="Tabela">
 
-<b>3. Como você acha que poderia melhorar o seu algoritmo para obter maior benefício com o paralelismo? Para provar seu ponto, refaça a solução com essa abordagem e construa um novo gráfico de speedup para 1, 2, 4, 6 e 8 processadores.</b>
+<ins><b>3. Como você acha que poderia melhorar o seu algoritmo para obter maior benefício com o paralelismo? Para provar seu ponto, refaça a solução com essa abordagem e construa um novo gráfico de speedup para 1, 2, 4, 6 e 8 processadores.</b></ins>
 
 O resultado obtido pelo grupo foi atribuído ao custo de se criar e destruir inúmeras threads. Portanto, a abordagem encontrada para solucionar esse problema diz respeito à utilização de menos threads: ao invés de criar uma thread para cada elemento da matriz, criar uma thread para cada linha/coluna da matriz. Os resultados da experiência se encontram abaixo:
 
