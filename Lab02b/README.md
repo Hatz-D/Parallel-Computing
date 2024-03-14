@@ -33,6 +33,10 @@ Vale notar que para validar o paralelismo do código desenvolvido, um outro cód
 
 <img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/htop-busywait.PNG" alt="Busywait">
 
+<br>
+
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab02b/specs.PNG" alt="Specs do processador">
+
 <hr>
 
 <h2>Questões</h2>
