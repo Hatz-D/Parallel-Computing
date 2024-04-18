@@ -9,7 +9,7 @@ double f(double x) {
 
 double soma(double a, double b, double n) {
 	int posicao = omp_get_thread_num();
-	int n_threads = omp_get_num_threads();
+	int n_threads = omp_get_num_threads();;
 
 	double h = (b-a)/n;
 	double local_n = n/n_threads;
@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 
 	double global = 0.0;
 
-#	pragma omp parallel num_threads(n)
+#	pragma omp parallel num_threads(n_threads)
 	{
 		double parcial = 0.0;
 

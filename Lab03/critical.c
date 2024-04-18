@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 
 	double global = 0.0;
 
-#	pragma omp parallel num_threads(n)
+#	pragma omp parallel num_threads(n_threads)
 	{
 		double parcial = 0.0;
 
