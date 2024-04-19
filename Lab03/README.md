@@ -2,7 +2,7 @@
 
 <h3>Laboratório realizado no dia 18 de abril</h3>
 
-<ins>Conteúdo:</ins> Neste laboratório, o cáluco de uma integral utilizando a regra dos trapézios foi explorado através da construção de algoritmos paralelos em C utilizando a biblioteca OpenMP. O programa distribui o cálculo de porções de trapézios em diferentes threads em somas parciais para depois somar as somas parciais em uma variável global compartilhada entre as threads. Ademais, uma comparação com diferentes quantidades de vCPUs foi realizada para obter o tempo de execução e speedup com números diferentes de núcleos.
+<ins>Conteúdo:</ins> Neste laboratório, o cálculo de uma integral utilizando a regra dos trapézios foi explorado através da construção de algoritmos paralelos em C utilizando a biblioteca OpenMP. O programa distribui o cálculo de porções de trapézios em diferentes threads em somas parciais para depois somar as somas parciais em uma variável global compartilhada entre as threads. Ademais, uma comparação com diferentes quantidades de vCPUs foi realizada para obter o tempo de execução e speedup com números diferentes de núcleos.
 
 <ins>Integrantes:</ins>
 
@@ -51,7 +51,7 @@ Durante o desenvolvimento do exercício, foi notório como o tempo de execução
 
 <ins><b>2. Qual o speedup para 1, 2, 4, 6 e 8 processadores? Desenhe um gráfico mostrando os diferentes valores de speedup.</b></ins>
 
-O speedup para 1, 2, 4, 6 e 8 processadores aumentou proporcionalmente com a adição de vCPUs para a versão paralela do código desenvolvido, tendo em vista que o paralelismo foi aplicado ao programa. Já o speedup para a versão serial do programa se manteve como 1, considerando que não houve ganho de desempenho com a adição de vCPUs.
+O speedup para 1, 2, 4, 6 e 8 processadores aumentou de uma forma diretamente proporcional com a adição de vCPUs para a versão paralela do código desenvolvido, tendo em vista que o paralelismo foi aplicado ao programa. Já o speedup para a versão serial do programa se manteve como 1, considerando que não houve ganho de desempenho com a adição de vCPUs.
 
 <img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab03/speedup.png" alt="Gráfico do speedup">
 
@@ -90,3 +90,5 @@ Para executá-lo, basta digitar o seguinte comando: <code>./a.out x y m n</code>
 </ol>
 
 <img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab03/execucao-paralela-sem-critical.png" alt="Processo de execução">
+
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Lab03/execucao-sem-critical.png" alt="Processo de execução">
