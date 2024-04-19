@@ -78,7 +78,9 @@ Para realizar a compilação dos códigos-fonte aqui disponibilizados, faz-se ne
 <h2>Execução</h2>
 Para executá-lo, basta digitar o seguinte comando: <code>./a.out x y m n</code>. Caso o arquivo gerado possua um nome diferente, basta substituir o arquivo <code> a.out</code> pelo nome do arquivo gerado no comando anterior. Vale notar que o programa <code>teste.c</code> requer um único argumento para a sua execução, o argumento sendo a quantidade de threads criadas para busywait.
 
-<ins>Argumentos</ins>
+<hr>
+
+<ins>Argumentos:</ins>
 
 <ol>
 <li><code>X</code>: A variável 'a' do código;</li>
