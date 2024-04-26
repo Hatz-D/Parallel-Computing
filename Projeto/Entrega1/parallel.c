@@ -7,6 +7,7 @@ void fatorial(int n, int* vet) {
         for (int i = 2; i <= n; ++i) {
             	resultado *= i;
 		vet[i] = resultado;
+		printf("%d ", resultado);
         }
        	return;
 }
@@ -22,7 +23,7 @@ long double soma(int n, int* vet) {
 	long double parcial_local = 0.0;
 
 	for(int i = 0; i < fim; i++) {
-		parcial_local += 1/vet[inicio+i];
+		parcial_local += 1.0/vet[inicio+i];
 	}
 	
 	return parcial_local;
@@ -53,7 +54,9 @@ int main(int argc, char* argv[]) {
 		global += parcial;
 	}
 
-	printf("\nResultado da aproximação de Euler: :%Lf\n", global);
+	printf("\nResultado da aproximação de Euler: :%.30Lf\n", global);
+
+	/*Vai ter que usar os vetores para calcular mesmo... Tanto a divisão quanto a soma quanto o fatorial*/
 
 	return 0;
 }
