@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <omp.h>
 #include <stdlib.h>
+#include <mpfr.h>
+#include <gmp.h>
 
-void fatorial(int n, int* vet) {
-	unsigned long long resultado = 1;
-        for (int i = 2; i <= n; ++i) {
-            	resultado *= i;
-		vet[i] = resultado;
-		printf("%d ", resultado);
+void fatorial(int n, mpfr_t* vet) {
+        for (long int i = 2; i <= n; ++i) {
+		mpfr_mul_si(vet[i], vet[i-1], i, MPFR_RNDU);
         }
+
        	return;
 }
 
-long double soma(int n, int* vet) {
+void soma(int n, mpfr_t* vet, int nBits, mpfr_ptr globalPointer) {
 	int posicao = omp_get_thread_num();
 	int n_threads = omp_get_num_threads();
 
@@ -20,43 +20,58 @@ long double soma(int n, int* vet) {
 	int inicio = parcela * posicao;
 	int fim = inicio + parcela;
 
-	long double parcial_local = 0.0;
+	mpfr_t parcial_local;
+	mpfr_init2(parcial_local, nBits);
+	mpfr_set_d(parcial_local, 0.0, MPFR_RNDU);
+
+	mpfr_t divisao;
+        mpfr_init2(divisao, nBits);
+        mpfr_set_d(divisao, 1.0, MPFR_RNDU);
 
 	for(int i = 0; i < fim; i++) {
-		parcial_local += 1.0/vet[inicio+i];
+		mpfr_d_div(divisao, 1.0, vet[inicio+i], MPFR_RNDU);
+		mpfr_add(parcial_local, parcial_local, divisao, MPFR_RNDU);
 	}
-	
-	return parcial_local;
+#	pragma omp critical 
+	{
+		mpfr_add(globalPointer, globalPointer, parcial_local, MPFR_RNDU);
+	}
+	/*
+	mpfr_clear(divisao);	
+	mpfr_clear(parcial_local);
+	*/
 }
 
 int main(int argc, char* argv[]) {
-	if(argc != 3) {
-		printf("\nEntre dois argumentos. 1: Quantidade de threads a serem executadas. 2: Iterações.\n");
+	if(argc != 4) {
+		printf("\nEntre três argumentos. 1: Quantidade de threads a serem executadas. 2: Iterações. 3: Número de bits\n");
 		return 1;
 	}
 
 	int nThreads = strtol(argv[1], NULL, 10);
 	int n = strtol(argv[2], NULL, 10);
+	int nBits = strtol(argv[3], NULL, 10);
 
-	long double global = 0.0;
+	mpfr_t global;
+	mpfr_init2(global, nBits);
+	mpfr_set_d(global, 0.0, MPFR_RNDU);
 
-	int* vet = calloc(n, sizeof(long long));
-	vet[0] = 1;
-	vet[1] = 1;
+	mpfr_t* vet = (mpfr_t*) malloc(n * sizeof(mpfr_t));
+	mpfr_init2(vet[0], nBits);
+	mpfr_set_d(vet[0], 1.0, MPFR_RNDU);
+	
+	mpfr_init2(vet[1], nBits);
+        mpfr_set_d(vet[1], 1.0, MPFR_RNDU);
+	
 	fatorial(n, vet);
 
 #	pragma omp parallel num_threads(nThreads)
 	{
-		long double parcial = 0.0;
-		parcial = soma(n, vet);
-
-#		pragma omp critical
-		global += parcial;
+		soma(n, vet, nBits, &global);
 	}
 
-	printf("\nResultado da aproximação de Euler: :%.30Lf\n", global);
-
-	/*Vai ter que usar os vetores para calcular mesmo... Tanto a divisão quanto a soma quanto o fatorial*/
+	printf("\nResultado da aproximação de Euler: ");
+	mpfr_out_str (stdout, 10, 0, global, MPFR_RNDU);
 
 	return 0;
 }

@@ -11,11 +11,11 @@ int main(int argc, char* argv[]) {
 		printf("\nEntre um argumento: 1. Quantidade de threads a serem executadas\n");
 		return 1;
 	}
-
-	mpfr_t x, y, z;
 	
+	mpfr_t x, y, z;
 	mpfr_init2(x, 100);
+	mpfr_set_d(x, 1.0, MPFR_RNDU);
 	mpfr_out_str(stdout, 10, 0, x, MPFR_RNDU);
-
+	
 	return 0;
 }
