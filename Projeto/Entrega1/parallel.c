@@ -4,21 +4,27 @@
 #include <mpfr.h>
 #include <gmp.h>
 
-void fatorial(int n, mpfr_t* vet) {
+void fatorial(int n, mpfr_t* vet, int nBits) {
         for (long int i = 2; i <= n; ++i) {
+		mpfr_init2(vet[i], nBits);
 		mpfr_mul_si(vet[i], vet[i-1], i, MPFR_RNDU);
         }
 
        	return;
 }
 
-void soma(int n, mpfr_t* vet, int nBits, mpfr_ptr globalPointer) {
+void soma(int n, mpfr_t* vet, int nBits, mpfr_t* globalPointer) {
 	int posicao = omp_get_thread_num();
 	int n_threads = omp_get_num_threads();
 
 	int parcela = n/n_threads;
 	int inicio = parcela * posicao;
-	int fim = inicio + parcela;
+	int fim = inicio + parcela - 1;
+
+	printf("Inicio: %d", inicio);
+	printf("Fim: %d", fim);
+	printf("Parcela: %d", parcela);
+	printf("\n");
 
 	mpfr_t parcial_local;
 	mpfr_init2(parcial_local, nBits);
@@ -28,13 +34,19 @@ void soma(int n, mpfr_t* vet, int nBits, mpfr_ptr globalPointer) {
         mpfr_init2(divisao, nBits);
         mpfr_set_d(divisao, 1.0, MPFR_RNDU);
 
-	for(int i = 0; i < fim; i++) {
-		mpfr_d_div(divisao, 1.0, vet[inicio+i], MPFR_RNDU);
+	mpfr_t um;
+	mpfr_init2(um, nBits);
+	mpfr_set_d(um, 1.0, MPFR_RNDU);
+
+	for(int i = inicio; i <= fim; i++) {
+		mpfr_div(divisao, um, vet[i], MPFR_RNDU);
 		mpfr_add(parcial_local, parcial_local, divisao, MPFR_RNDU);
+
+		mpfr_printf("O valor é %.10Rf Para thread %d\n", parcial_local, posicao);
 	}
 #	pragma omp critical 
 	{
-		mpfr_add(globalPointer, globalPointer, parcial_local, MPFR_RNDU);
+		mpfr_add(*globalPointer, *globalPointer, parcial_local, MPFR_RNDU);
 	}
 	/*
 	mpfr_clear(divisao);	
@@ -63,15 +75,16 @@ int main(int argc, char* argv[]) {
 	mpfr_init2(vet[1], nBits);
         mpfr_set_d(vet[1], 1.0, MPFR_RNDU);
 	
-	fatorial(n, vet);
+	fatorial(n, vet, nBits);
 
 #	pragma omp parallel num_threads(nThreads)
 	{
 		soma(n, vet, nBits, &global);
 	}
 
-	printf("\nResultado da aproximação de Euler: ");
+	printf("\n\n\n\n\n\nResultado da aproximação de Euler: ");
 	mpfr_out_str (stdout, 10, 0, global, MPFR_RNDU);
+	printf("\n");
 
 	return 0;
 }
