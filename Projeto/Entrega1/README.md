@@ -13,6 +13,7 @@
 <ul>
 <li><code>parallel.c</code>: Código-fonte do exercício paralelo proposto.</li>
 <li><code>critical.c</code>: Código-fonte do exercício paralelo proposto com a diretiva critical.</li>
+<li><code>logs</code>: Log de execução do exercício proposto.</li>
 </ul>
 
 <hr>
