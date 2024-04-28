@@ -43,7 +43,10 @@ void soma(int n, mpfr_t* vet, int nBits, mpfr_t* globalPointer) {
 		mpfr_add(parcial_local, parcial_local, divisao, MPFR_RNDU);
 	}
 
-	mpfr_add(*globalPointer, *globalPointer, parcial_local, MPFR_RNDU);
+#	pragma omp critical 
+	{
+		mpfr_add(*globalPointer, *globalPointer, parcial_local, MPFR_RNDU);
+	}
 	
 	mpfr_clear(divisao);	
 	mpfr_clear(parcial_local);
