@@ -7,16 +7,13 @@
 void fatorial(int n, mpfr_t* vet, int nBits) {
 	mpfr_init2(vet[0], nBits);
         mpfr_set_d(vet[0], 1.0, MPFR_RNDU);
-	mpfr_printf("%Rf ", vet[0]);
 
         mpfr_init2(vet[1], nBits);
         mpfr_set_d(vet[1], 1.0, MPFR_RNDU);
-	mpfr_printf("%Rf ", vet[1]);
 
-        for (long int i = 2; i <= n; ++i) {
+        for (long int i = 2; i < n; ++i) {
 		mpfr_init2(vet[i], nBits);
 		mpfr_mul_si(vet[i], vet[i-1], i, MPFR_RNDU);
-		mpfr_printf("%Rf ", vet[i]);
         }
 
        	return;
@@ -30,38 +27,30 @@ void soma(int n, mpfr_t* vet, int nBits, mpfr_t* globalPointer) {
 	int inicio = parcela * posicao;
 	int fim = inicio + parcela - 1;
 
-	printf("Inicio: %d", inicio);
-	printf("Fim: %d", fim);
-	printf("Parcela: %d", parcela);
-	printf("\n");
+	mpfr_t parcial_local, divisao, um;
 
-	mpfr_t parcial_local;
 	mpfr_init2(parcial_local, nBits);
 	mpfr_set_d(parcial_local, 0.0, MPFR_RNDU);
 
-	mpfr_t divisao;
         mpfr_init2(divisao, nBits);
         mpfr_set_d(divisao, 1.0, MPFR_RNDU);
 
-	mpfr_t um;
 	mpfr_init2(um, nBits);
 	mpfr_set_d(um, 1.0, MPFR_RNDU);
 
 	for(int i = inicio; i <= fim; i++) {
 		mpfr_div(divisao, um, vet[i], MPFR_RNDU);
 		mpfr_add(parcial_local, parcial_local, divisao, MPFR_RNDU);
-
-		mpfr_printf("O valor é %.10Rf Para thread %d\n", divisao, posicao);
-		/*mpfr_printf(" Fatorial:%.10Rf\n", vet[i]);*/
 	}
+
 #	pragma omp critical 
 	{
 		mpfr_add(*globalPointer, *globalPointer, parcial_local, MPFR_RNDU);
 	}
-	/*
+	
 	mpfr_clear(divisao);	
 	mpfr_clear(parcial_local);
-	*/
+	mpfr_clear(um);
 }
 
 int main(int argc, char* argv[]) {
@@ -81,18 +70,17 @@ int main(int argc, char* argv[]) {
 	mpfr_t* vet = (mpfr_t*) malloc(n * sizeof(mpfr_t));
 	
 	fatorial(n, vet, nBits);
-	printf("\n");
-	for(int i = 0; i <= n; i++) {mpfr_printf("%Rf ", vet[i]);}
-	printf("\n");
 
 #	pragma omp parallel num_threads(nThreads)
 	{
 		soma(n, vet, nBits, &global);
 	}
 
-	printf("\n\n\n\n\n\nResultado da aproximação de Euler: ");
+	printf("Resultado da aproximação de Euler: ");
 	mpfr_out_str (stdout, 10, 0, global, MPFR_RNDU);
 	printf("\n");
+
+	mpfr_clear(global);
 
 	return 0;
 }
