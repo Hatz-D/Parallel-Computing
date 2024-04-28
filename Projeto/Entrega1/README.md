@@ -2,7 +2,7 @@
 
 <h3>Laboratório realizado no dia 28 de abril</h3>
 
-<ins>Conteúdo:</ins>Para este projeto, o cálculo da constante matemática de Euler utilizando a série de Taylor foi explorado através da construção de algoritmos paralelos em C utilizando a biblioteca OpenMP. O programa distribui o cálculo de porções de somatórias em diferentes threads em somas parciais para depois somar as somas parciais em uma variável global compartilhada entre as threads. Ademais, uma comparação com diferentes quantidades de vCPUs foi realizada para obter o tempo de execução e speedup com números diferentes de núcleos. Para se obter uma maior precisão no cálculo da aproximação, as bibliotecas MPFR e GMP foram utilizadas para se criar estruturas cuja precisão de número de bits é limitada somente pela memória disponível no computador.
+<ins>Conteúdo:</ins> Para este projeto, o cálculo da constante matemática de Euler utilizando a série de Taylor foi explorado através da construção de algoritmos paralelos em C utilizando a biblioteca OpenMP. O programa distribui o cálculo de porções de somatórias em diferentes threads em somas parciais para depois somar as somas parciais em uma variável global compartilhada entre as threads. Ademais, uma comparação com diferentes quantidades de vCPUs foi realizada para obter o tempo de execução e speedup com números diferentes de núcleos. Para se obter uma maior precisão no cálculo da aproximação, as bibliotecas MPFR e GMP foram utilizadas para se criar estruturas cuja precisão de número de bits é limitada somente pela memória disponível no computador.
 
 <ins>Integrantes:</ins>
 
@@ -17,7 +17,7 @@
 
 <hr>
 <h2>Exercício</h2>
-Para realizar a comparação dos tempos seriais e paralelos de execução do problema da aproximação do número de Euler através da série de Taylor, duas versões diferentes deste exercício foram desenvolvidas: <code>parallel.c</code> e <code>critical.c</code>. Cada versão desse exercício corresponde a duas abordagens para a versão paralela: uma com o cálculo sem a utilização do prag critical e outra com o cálculo com a utilização do prag critical. 
+Para realizar a comparação dos tempos seriais e paralelos de execução do problema da aproximação do número de Euler através da série de Taylor, duas versões diferentes deste exercício foram desenvolvidas: <code>parallel.c</code> e <code>critical.c</code>. Cada versão desse exercício corresponde a duas abordagens para a versão paralela: uma com o cálculo sem a utilização do prag critical e outra com o cálculo com a utilização do prag critical.
 
 A função <code>soma</code> é responsável por calcular uma série de somatórias da série de Taylor <code>(1/n!)</code>. Ela recebe um argumento com o vetor de fatoriais <code>vet</code> calculados na função <code>fatorial</code>, bem como o número de somatórias a serem calculados <code>n</code>, a quantidade de bits <code>nBits</code> que representarão a precisão das variáveis <code>mpfr_t</code> e um ponteiro para a variável global <code>globalPointer</code>. As threads criadas posteriormente executarão essa função para efetuar os cálculos das somatórias da série.
 
@@ -80,6 +80,8 @@ Para realizar a compilação dos códigos-fonte aqui disponibilizados, faz-se ne
 
 <h2>Execução</h2>
 Para executá-lo, basta digitar o seguinte comando: <code>./a.out x y z</code>. Caso o arquivo gerado possua um nome diferente, basta substituir o arquivo <code> a.out</code> pelo nome do arquivo gerado no comando anterior. Vale notar que o programa <code>teste.c</code> requer um único argumento para a sua execução, o argumento sendo a quantidade de threads criadas para busywait.
+
+Para a execução dos programas desenvolvidos, foi padronizado o cálculo de 5.000.000 de iterações com uma precisão de 7.000 bits por cada variável <code>mpfr_t</code>.
 
 <hr>
 
