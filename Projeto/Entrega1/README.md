@@ -42,35 +42,39 @@ Vale notar que para validar o paralelismo do código desenvolvido, um outro cód
 
 Durante o desenvolvimento do exercício, foi notório como o tempo de execução serial não mudou com a adição ou remoção de vCPUs, assim como o tempo de execução paralelo apresentou uma diferença muito significativa com a adição de vCPUs, reduzindo bastante o tempo de execução do programa. Essa diferença alarmante na versão paralela do código pode ser atribuída ao paralelismo sendo efetuado em todos os cores do processador utilizado. Vale notar que para a versão paralela do código, foi padronizado a utilização de 8 threads. 
 
-<img src="" alt="Tabela do tempo de execução serial e paralelo">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Projeto/Entrega1/tabela.png" alt="Tabela do tempo de execução serial e paralelo">
 
 <br>
 
-<img src="" alt="Gráfico do tempo de execução serial e paralelo">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Projeto/Entrega1/grafico-serial-vs-paralela.png" alt="Gráfico do tempo de execução serial e paralelo">
 
 <ins><b>2. Qual o speedup para 1, 2, 4, 6 e 8 processadores? Desenhe um gráfico mostrando os diferentes valores de speedup.</b></ins>
 
 O speedup para 1, 2, 4, 6 e 8 processadores aumentou de uma forma diretamente proporcional com a adição de vCPUs para a versão paralela do código desenvolvido, tendo em vista que o paralelismo foi aplicado ao programa. Já o speedup para a versão serial do programa se manteve como 1, considerando que não houve ganho de desempenho com a adição de vCPUs.
 
-<img src="" alt="Gráfico do speedup">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Projeto/Entrega1/speedup.png" alt="Gráfico do speedup">
 
 <ins><b>3. Introduza na sua solução a diretiva critical. O que muda? Para provar seu ponto, refaça a solução com essa abordagem, calcule os novos valores e construa um novo gráfico de speedup para 1, 2, 4, 6 e 8 processadores.</b></ins>
 
 Com a adição da diretiva critical no programa, a condição de corrida existente envolvendo a somatória das somas parciais calculadas pelas threads na variável global é resolvida, uma vez que, assim, somente uma das threads poderá acessar e modificar o valor dessa variável por vez. É notório como o speedup para essa versão continuou a crescer conforme a adição de vCPUs, no entanto, o tempo médio da execução dessa versão do código foi ligeiramente maior do que a versão sem a diretiva critical. Essa diferença pode ser atribuída ao fato que o critical representa uma porção serial no código, em que somente uma thread pode acessar o valor da variável global por vez.
 
-<img src="" alt="Gráfico do speedup">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Projeto/Entrega1/speedup-critical.png" alt="Gráfico do speedup">
 
 <br>
 
-<img src="" alt="Tabela">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Projeto/Entrega1/tabela-critical.png" alt="Tabela">
+
+<br>
+
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Projeto/Entrega1/grafico-paralela-critical.png" alt="Gráfico do tempo de execução serial e paralelo">
 
 <hr>
 
 <h2>Compilação</h2>
 
-Para realizar a compilação dos códigos-fonte aqui disponibilizados, faz-se necessária a utilização do compilador GCC. Caso não o tenha instalado, basta digitar o seguinte comando em um terminal linux: <code>sudo yum install gcc</code>. A compilação dos arquivos .c deste repositório podem ser compilados da seguinte forma: <code>gcc exemplo.c -lmpfr -lgmp -fopenmp</code>, em que o campo exemplo é substituído pelo nome do arquivo .c. Após isso, um arquivo <code>a.out</code> será gerado. Vale ressaltar que como o código-fonte deste laboratório utiliza as bibliotecas OpenMP, MPFR e GMP, é necessário adicionar os argumentos <code>-fopenmp</code>, <code>lgmp</code> e <code>-lmpfr</code> durante a compilação do programa. 
+Para realizar a compilação dos códigos-fonte aqui disponibilizados, faz-se necessária a utilização do compilador GCC. Caso não o tenha instalado, basta digitar o seguinte comando em um terminal linux: <code>sudo yum install gcc</code>. A compilação dos arquivos .c deste repositório podem ser compilados da seguinte forma: <code>gcc exemplo.c -lmpfr -lgmp -fopenmp</code>, em que o campo exemplo é substituído pelo nome do arquivo .c. Após isso, um arquivo <code>a.out</code> será gerado. Vale ressaltar que como o código-fonte deste laboratório utiliza as bibliotecas OpenMP, MPFR e GMP, é necessário adicionar os argumentos <code>-fopenmp</code>, <code>lgmp</code> e <code>-lmpfr</code> durante a compilação do programa. Ademais, como as bibliotecas MPFR e GMP não são nativas ao GCC, faz-se necessário fazer o download delas pela internet. O link para o download está disponível na seção de referências deste subdiretório. 
 
-<img src="" alt="Processo de compilação">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Projeto/Entrega1/compilacao.png" alt="Processo de compilação">
 
 <hr>
 
@@ -87,7 +91,15 @@ Para executá-lo, basta digitar o seguinte comando: <code>./a.out x y z</code>. 
 <li><code>Z</code>: A precisão do número a ser calculado (bits);</li>
 </ol>
 
-<img src="" alt="Processo de execução">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Projeto/Entrega1/execucao.png" alt="Processo de execução">
 
-<img src="" alt="Processo de execução">
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Projeto/Entrega1/execucao2.png" alt="Processo de execução">
 
+<hr>
+
+<h2>Referências</h2>
+
+<ul>
+<li>Documentação do MPFR, disponível no seguinte link: https://www.mpfr.org/mpfr-current/mpfr.html</li>
+<li>Documentação do GMP, disponível no seguinte link: https://gmplib.org/manual/</li>
+</ul>
