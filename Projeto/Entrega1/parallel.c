@@ -5,9 +5,18 @@
 #include <gmp.h>
 
 void fatorial(int n, mpfr_t* vet, int nBits) {
+	mpfr_init2(vet[0], nBits);
+        mpfr_set_d(vet[0], 1.0, MPFR_RNDU);
+	mpfr_printf("%Rf ", vet[0]);
+
+        mpfr_init2(vet[1], nBits);
+        mpfr_set_d(vet[1], 1.0, MPFR_RNDU);
+	mpfr_printf("%Rf ", vet[1]);
+
         for (long int i = 2; i <= n; ++i) {
 		mpfr_init2(vet[i], nBits);
 		mpfr_mul_si(vet[i], vet[i-1], i, MPFR_RNDU);
+		mpfr_printf("%Rf ", vet[i]);
         }
 
        	return;
@@ -42,7 +51,8 @@ void soma(int n, mpfr_t* vet, int nBits, mpfr_t* globalPointer) {
 		mpfr_div(divisao, um, vet[i], MPFR_RNDU);
 		mpfr_add(parcial_local, parcial_local, divisao, MPFR_RNDU);
 
-		mpfr_printf("O valor é %.10Rf Para thread %d\n", parcial_local, posicao);
+		mpfr_printf("O valor é %.10Rf Para thread %d\n", divisao, posicao);
+		/*mpfr_printf(" Fatorial:%.10Rf\n", vet[i]);*/
 	}
 #	pragma omp critical 
 	{
@@ -69,13 +79,11 @@ int main(int argc, char* argv[]) {
 	mpfr_set_d(global, 0.0, MPFR_RNDU);
 
 	mpfr_t* vet = (mpfr_t*) malloc(n * sizeof(mpfr_t));
-	mpfr_init2(vet[0], nBits);
-	mpfr_set_d(vet[0], 1.0, MPFR_RNDU);
-	
-	mpfr_init2(vet[1], nBits);
-        mpfr_set_d(vet[1], 1.0, MPFR_RNDU);
 	
 	fatorial(n, vet, nBits);
+	printf("\n");
+	for(int i = 0; i <= n; i++) {mpfr_printf("%Rf ", vet[i]);}
+	printf("\n");
 
 #	pragma omp parallel num_threads(nThreads)
 	{
