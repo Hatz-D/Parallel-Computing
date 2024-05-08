@@ -71,6 +71,29 @@ Com a adição da diretiva critical no programa, a condição de corrida existen
 
 <hr>
 
+<h2>Instalação das Dependências</h2>
+
+Para realizar a instalação das dependências, realize os seguintes passos:
+
+<ol>
+  <li><code>sudo apt-get install m4 -y</code></li>
+  <li><code>wget https://gmplib.org/download/gmp/gmp-6.3.0.tar.xz</code></li>
+  <li><code>tar -xf gmp-6.3.0.tar.xz</code></li>
+  <li><code>cd gmp-6.3.0</code></li>
+  <li><code>./configure</code></li>
+  <li><code>make</code></li>
+  <li><code>make check</code></li>
+  <li><code>make install</code></li>
+  <li><code>cd ..</code></li>
+  <li><code>wget https://www.mpfr.org/mpfr-current/mpfr-4.2.1.tar.xz</code></li>
+  <li><code>tar -xf mpfr-4.2.1.tar.xz</code></li>
+  <li><code>cd mpfr-4.2.1</code></li>
+  <li><code>./configure</code></li>
+  <li><code>make</code></li>
+  <li><code>make check</code></li>
+  <li><code>make install</code></li>
+</ol>
+
 <h2>Compilação</h2>
 
 Para realizar a compilação dos códigos-fonte aqui disponibilizados, faz-se necessária a utilização do compilador GCC. Caso não o tenha instalado, basta digitar o seguinte comando em um terminal linux: <code>sudo yum install gcc</code>. A compilação dos arquivos .c deste repositório podem ser compilados da seguinte forma: <code>gcc exemplo.c -lmpfr -lgmp -fopenmp</code>, em que o campo exemplo é substituído pelo nome do arquivo .c. Após isso, um arquivo <code>a.out</code> será gerado. Vale ressaltar que como o código-fonte deste laboratório utiliza as bibliotecas OpenMP, MPFR e GMP, é necessário adicionar os argumentos <code>-fopenmp</code>, <code>lgmp</code> e <code>-lmpfr</code> durante a compilação do programa. Ademais, como as bibliotecas MPFR e GMP não são nativas ao GCC, faz-se necessário fazer o download delas pela internet. O link para o download está disponível na seção de referências deste subdiretório. 
