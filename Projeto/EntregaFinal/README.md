@@ -129,6 +129,10 @@ No código-fonte final do projeto aqui proposto, o cálculo do fatorial de N seg
 
 No entanto, o problema observado durante essa abordagem é o tempo de execução do código, que se mostra muito superior do que a sua abordagem sequencial. Este resultado pode ser atribuído aos diferentes algoritmos do cálculo da multiplicação pela biblioteca MPFR: existem dois algoritmos para a multiplicação, a depender da precisão dos números a serem multiplicados. Como a abordagem sequencial realiza a multiplicação de um objeto <code>mpfr_t</code> por um <code>inteiro</code>, o algoritmo de multiplicação utilizado obtém uma performance muito superior ao outro algoritmo. Portanto, foi decidido manter a abordagem sequencial do cálculo do fatorial em detrimento de sua versão paralela.
 
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Projeto/EntregaFinal/fatorial.png" alt="Comparação">
+
+<hr>
+
 <h2>Referências</h2>
 
 <ul>
