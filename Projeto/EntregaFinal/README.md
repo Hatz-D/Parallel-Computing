@@ -127,9 +127,23 @@ Para a execução dos programas desenvolvidos, foi padronizado o cálculo de 5.0
 <h2>Fatorial</h2>
 No código-fonte final do projeto aqui proposto, o cálculo do fatorial de N segue uma abordagem de cálculo sequencial ao invés de paralelo. O arquivo <code>fatorial.c</code> disponível neste diretório apresenta uma tentativa de paralelização do cálculo do fatorial de N através do cálculo parcial dos fatoriais por diferentes threads seguido pela agregação dos resultados. Por exemplo: a thread 2 calcula a porção do fatorial de 10 até o fatorial de 20. O fatorial parcial de 20 será 10 * 11 * 12 * ... * 20.Para agregar esse valor ao seu valor final, o fatorial de 9 será multiplicado pelo fatorial parcial de cada um dos índices do vetor de fatoriais de 10 a 20.
 
-No entanto, o problema observado durante essa abordagem é o tempo de execução do código, que se mostra muito superior do que a sua abordagem sequencial. Este resultado pode ser atribuído aos diferentes algoritmos do cálculo da multiplicação pela biblioteca MPFR: existem dois algoritmos para a multiplicação, a depender da precisão dos números a serem multiplicados. Como a abordagem sequencial realiza a multiplicação de um objeto <code>mpfr_t</code> por um <code>inteiro</code>, o algoritmo de multiplicação utilizado obtém uma performance muito superior ao outro algoritmo. Portanto, foi decidido manter a abordagem sequencial do cálculo do fatorial em detrimento de sua versão paralela.
+No entanto, o problema observado durante essa abordagem é o tempo de execução do código, que se mostra muito superior do que a sua abordagem sequencial. Este resultado pode ser atribuído aos diferentes algoritmos do cálculo da multiplicação pela biblioteca MPFR: existem dois algoritmos para a multiplicação, a depender da precisão dos números a serem multiplicados. Como a abordagem sequencial realiza a multiplicação de um objeto <code>mpfr_t</code> por um <code>inteiro</code>, o algoritmo de multiplicação utilizado (mpn_mul) obtém uma performance muito superior ao outro algoritmo (mpfr_mulhigh_n). Portanto, foi decidido manter a abordagem sequencial do cálculo do fatorial em detrimento de sua versão paralela.
 
 <img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Projeto/EntregaFinal/fatorial.png" alt="Comparação">
+
+<hr>
+
+<h2>Resultado</h2>
+O algoritmo neste repositório foi capaz de calcular com precisão <b>406.386</b> dígitos do número de Euler ao longo de <b>2m4 737</b>. O número calculado se encontra no arquivo <code>logs</code> deste repositório.
+
+<ul>
+<li>Dígitos calculados: 406.386</li>
+<li>Tempo de execução: 2m4.737s</li>
+<li>Bits de precisão: 1.350.000</li>
+<li>Iterações: 90.000</li>
+</ul>
+
+<img src="https://raw.githubusercontent.com/Hatz-D/Parallel-Computing/main/src/Projeto/EntregaFinal/Screenshot.PNG" alt="Resultados">
 
 <hr>
 
@@ -138,4 +152,5 @@ No entanto, o problema observado durante essa abordagem é o tempo de execução
 <ul>
 <li>Documentação do MPFR, disponível no seguinte link: https://www.mpfr.org/mpfr-current/mpfr.html</li>
 <li>Documentação do GMP, disponível no seguinte link: https://gmplib.org/manual/</li>
+<li>Número de Euler, disponível no seguinte link: https://apod.nasa.gov/htmltest/gifcity/e.2mil</li>
 </ul>

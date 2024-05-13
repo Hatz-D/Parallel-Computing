@@ -4,14 +4,14 @@
 #include <mpfr.h>
 #include <gmp.h>
 
-void fatorial(int n, mpfr_t* vet, int nBits) {
+void fatorial(long long int n, mpfr_t* vet, int nBits) {
 	mpfr_init2(vet[0], nBits);
         mpfr_set_d(vet[0], 1.0, MPFR_RNDU);
 
         mpfr_init2(vet[1], nBits);
         mpfr_set_d(vet[1], 1.0, MPFR_RNDU);
 
-        for (long int i = 2; i < n; ++i) {
+        for (long long int i = 2; i < n; ++i) {
 		mpfr_init2(vet[i], nBits);
 		mpfr_mul_si(vet[i], vet[i-1], i, MPFR_RNDU);
         }
@@ -19,13 +19,13 @@ void fatorial(int n, mpfr_t* vet, int nBits) {
        	return;
 }
 
-void soma(int n, mpfr_t* vet, int nBits, mpfr_t* globalPointer) {
+void soma(long long int n, mpfr_t* vet, int nBits, mpfr_t* globalPointer) {
 	int posicao = omp_get_thread_num();
 	int n_threads = omp_get_num_threads();
 
-	int parcela = n/n_threads;
-	int inicio = parcela * posicao;
-	int fim = inicio + parcela - 1;
+	long long int parcela = n/n_threads;
+	long long int inicio = parcela * posicao;
+	long long int fim = inicio + parcela - 1;
 
 	mpfr_t parcial_local, divisao, um;
 
@@ -38,8 +38,9 @@ void soma(int n, mpfr_t* vet, int nBits, mpfr_t* globalPointer) {
 	mpfr_init2(um, nBits);
 	mpfr_set_d(um, 1.0, MPFR_RNDU);
 
-	for(int i = inicio; i <= fim; i++) {
+	for(long long int i = inicio; i <= fim; i++) {
 		mpfr_div(divisao, um, vet[i], MPFR_RNDU);
+		mpfr_clear(vet[i]);
 		mpfr_add(parcial_local, parcial_local, divisao, MPFR_RNDU);
 	}
 
@@ -60,7 +61,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	int nThreads = strtol(argv[1], NULL, 10);
-	int n = strtol(argv[2], NULL, 10);
+	long long int n = strtoll(argv[2], NULL, 10);
 	int nBits = strtol(argv[3], NULL, 10);
 
 	mpfr_t global;
